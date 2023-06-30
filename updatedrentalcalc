@@ -1,0 +1,103 @@
+#Define the class 
+class Calc():
+
+    def __init__(self):
+        self.rentalincome = 0 
+        self.new_income = 0 
+        self.totalexpenses = 0 
+        self.cash_Flow = 0 
+
+#First get the income.
+    def getIncome(self):
+        self.rentalincome= int(input("Enter the price of the rental: "))
+        print(f"You've entered {self.rentalincome}")
+        laundry_income= int(input("Enter your laundry income: "))
+        print(f"You've entered {laundry_income}")
+        storage_income= int(input("Enter your storage income: "))
+        print(f"You've entered {storage_income}")
+        misc_= int(input("Enter any miscellaneous income: "))
+        print(f"You've entered {misc_}")
+        
+        self.new_income = int(self.rentalincome) + int(laundry_income)+ int(storage_income) + int(misc_)
+        print(f'Your rental income is {self.new_income}.')
+
+#Second - calculate expenses 
+    def calculate_Expenses(self):
+        expenses = [
+            'Taxes',
+            'Expenses',
+            'Insurance',
+            'Utilities',
+            'Electric',
+            'Water',
+            'Sewer',
+            'Trash',
+            'Gas',
+            'HOA',
+            'Landscape',
+            'Vacancy',
+            'Repairs',
+            'CapEx',
+            'Mortgage',
+            'Property Management'
+        ]
+    
+        total = 0
+    
+        for expense in expenses:
+            value = input(f"Enter the value for {expense} (Enter 0 if no value): ")
+            try:
+                total += float(value)
+            except ValueError:
+                print(f"Invalid input for {expense}. Please enter a number. Setting value to 0.")
+    
+        print("Total Monthly Expense: $", round(total, 2))
+
+#Third - Calculate one's cash flow.
+    def cashFlow(self):
+        input1= int(input("Enter your income: "))
+        input2= int(input("Enter your expenses: "))
+        self.cash_Flow = input1 - input2 
+        print(f'Your cash flow is: {self.cash_Flow}.')
+        return self.cash_Flow
+
+#Fourth - Calculate ROI
+    def calculate_ROI(self):
+        down_payment = float(input("Enter the value for Down Payment: "))
+        closing_cost = float(input("Enter the value for Closing Cost: "))
+        rehab_budget = float(input("Enter the value for Rehab Budget: "))
+        misc_other = float(input("Enter the value for Misc Other: "))
+        annual_cash_flow = float(input("Enter the value for Annual Cash Flow: "))
+
+        total_investment = down_payment + closing_cost + rehab_budget + misc_other
+        print(f"Total Investment: ${total_investment}")
+
+        roi_calculation = (annual_cash_flow / total_investment) * 100
+        print(f"Cash on Cash ROI: {roi_calculation}%")
+
+    def exit_(self): 
+        exit()
+
+#Initialize calc
+a_rental_calc = Calc() 
+
+print("Welcome! This is the rental property calculator.")
+print("Type 'enter' to begin.")
+print("Type 'exit' to exit.")
+
+def run():
+    while True:
+        an_input = input("What would you like to do?")
+
+        if an_input == "enter": 
+            a_rental_calc.getIncome()
+            a_rental_calc.calculate_Expenses()
+            a_rental_calc.cashFlow()
+            a_rental_calc.calculate_ROI() 
+            a_rental_calc.exit_() 
+        elif an_input == "exit":
+            a_rental_calc.exit_()
+        else:
+            print("That's not a valid option.")
+
+run()
